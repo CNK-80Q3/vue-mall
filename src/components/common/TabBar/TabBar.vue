@@ -15,5 +15,5 @@ export default {
 </script>
 
 <style>
-  @import "~assets/css/TabBar/TabBar.css";
+  @import "~assets/css/tabbar/TabBar.css";
 </style>

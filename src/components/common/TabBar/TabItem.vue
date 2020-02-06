@@ -44,5 +44,5 @@ export default {
 </script>
 
 <style>
-  @import "~assets/css/TabBar/TabItem.css";
+  @import "~assets/css/tabbar/TabItem.css";
 </style>
