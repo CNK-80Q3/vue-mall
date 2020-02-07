@@ -25,6 +25,7 @@ export default {
     line-height: 44px;
     text-align: center;
     box-shadow: 0 -3px 3px rgba(125, 125, 125, .2);
+    z-index: 1000;
   }
 
   .left, .right {

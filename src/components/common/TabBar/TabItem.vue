@@ -32,7 +32,7 @@ export default {
       return !this.$route.path.indexOf(this.path)
     },
     activeStyle() {
-      return this.isActive ? {color: this.activeColor} : {}
+      return this.isActive ? { color: this.activeColor } : {}
     }
   },
   methods: {
@@ -44,5 +44,17 @@ export default {
 </script>
 
 <style>
-  @import "~assets/css/tabbar/TabItem.css";
+.tab-item img {
+  margin-top: 1px;
+  width: 29px;
+  vertical-align: middle;
+}
+
+.tab-item div {
+  font-size: 12px;
+}
+
+.active {
+  color: #d81e06;
+}
 </style>

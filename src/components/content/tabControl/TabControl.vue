@@ -1,10 +1,10 @@
 <template>
   <div class="tab-control">
     <div
-      v-for="(item, index) in titles"
-      :key="(item,index)"
+      v-for="(item, index) in tabs"
+      :key="item"
       class="tab-control-item"
-      :class="{active: index===currentIndex}"
+      :class="{active: index == currentIndex}"
       @click="itemClick(index)"
     >
       <span>{{item}}</span>
@@ -15,23 +15,23 @@
 <script>
 export default {
   name: 'TabControl',
-  props: {
-    titles: {
-      type: Array,
-      default() {
-        return [];
-      }
-    }
-  },
   data() {
     return {
-      currentIndex: 0,
+      currentIndex: 0
+    }
+  },
+  props: {
+    tabs: {
+      type: Array,
+      default() {
+        return []
+      }
     }
   },
   methods: {
     itemClick(index) {
-      this.currentIndex = index;
-      this.$emit('tabClick', index);
+      this.currentIndex = index
+      this.$emit('tabSwitch', index)
     }
   }
 }
@@ -39,22 +39,31 @@ export default {
 
 <style scoped>
 .tab-control {
+  width: 100vw;
+  height: 40px;
   display: flex;
   text-align: center;
-  font-size: 15px;
-  height: 40px;
   line-height: 40px;
+  font-size: 15px;
+  position: sticky;
+  top: 44px;
+  z-index: 8;
   background-color: #fff;
 }
+
 .tab-control-item {
   flex: 1;
+  padding: 5px;
 }
+
 .tab-control-item span {
   padding: 5px;
 }
+
 .active {
-  color: #ff5777;
+  color: var(--color-tint);
 }
+
 .active span {
   border-bottom: 3px solid var(--color-tint);
 }
