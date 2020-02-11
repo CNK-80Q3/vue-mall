@@ -16,22 +16,35 @@ export default {
       scroll: null
     }
   },
+  props: {
+    probe: {
+      type: Number,
+      default: 0
+    }
+  },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
-      probeType: 0,
+      probeType: this.probe,
       pullUpLoad: true,
       click: true
     })
     this.scroll.on('scroll', (position) => {
-      console.log(position)
+      this.$emit('ctrlShow', position)
     })
     this.scroll.on('pullingUp', () => {
-      console.log('上拉刷新')
-      setTimeout(() => {
-        console.log('数据加载完毕')
-        this.scroll.finishPullUp()
-      }, 2000)
+      this.$emit('pullingUp')
     })
+  },
+  methods: {
+    scrollTo(x, y, time = 300) {
+      this.scroll && this.scroll.scrollTo(x, y, time)
+    },
+    finishPullUp() {
+      this.scroll && this.scroll.finishPullUp()
+    },
+    loadRefresh() {
+      this.scroll && this.scroll.refresh()
+    }
   }
 }
 </script>

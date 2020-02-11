@@ -305,6 +305,7 @@
       <li>name98</li>
       <li>name99</li>
     </ul>
+    <div class="abc">123</div>
   </h1>
 </template>
 
@@ -331,6 +332,18 @@ export default {
   top: 0px;
   z-index: 8;
   background-color: #fff;
+}
+
+.abc {
+  width: 200px;
+  height: 200px;
+  position: sticky;
+  margin-top: 50px;
+  background: red;
+  bottom: 100px;
+  box-sizing: inherit;
+  padding: 30px;
+  border: 50px solid #000;
 }
 
 .sticky2 {

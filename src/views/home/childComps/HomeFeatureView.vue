@@ -15,7 +15,6 @@ export default {
 <style scoped>
 .feature {
   text-align: center;
-  padding: 15px 0 20px 0;
   border-bottom: 8px solid #eee;
 }
 

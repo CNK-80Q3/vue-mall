@@ -1,7 +1,7 @@
 <template>
   <div class="goods-list-item">
     <a :href="goodsItem.clientUrl">
-      <img :src="goodsItem.show.img" alt />
+      <img :src="goodsItem.show.img" :alt="goodsItem.title" @load="imageLoad"/>
     </a>
     <a :href="goodsItem.clientUrl">
       <p>{{goodsItem.title}}</p>
@@ -22,6 +22,12 @@ export default {
       default() {
         return {}
       }
+    }
+  },
+  methods: {
+    // 使用时间总线管理事件，时间总线与vuex类似，只不过时间总线管理事件，vuex管理状态
+    imageLoad() {
+      this.$bus.$emit('itemImageLoad')
     }
   }
 }

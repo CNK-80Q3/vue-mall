@@ -3,13 +3,14 @@
     <NavBar class="home-nav">
       <div slot="center">购物街</div>
     </NavBar>
-    <Scroll class="content">
+    <Scroll class="content" ref="scroll" @ctrlShow="ctrlShow" :probe="3" @pullingUp="pullingUp">
       <HomeSwiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
       <HomeRecommendView :recommends="recommends" />
       <HomeFeatureView />
       <TabControl :tabs="['流行', '新款', '精选']" @tabSwitch="tabSwitch" ref="tabControl2" />
       <GoodsList :goods="showGoods" />
     </Scroll>
+    <BackTop @click.native="backTop" v-show="isShowBackTop" />
   </div>
 </template>
 
@@ -19,12 +20,15 @@ import Scroll from 'components/common/scroll/Scroll'
 
 import TabControl from 'components/content/tabControl/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
+import BackTop from 'components/content/backTop/BackTop'
 
 import HomeSwiper from 'views/home/childComps/HomeSwiper'
 import HomeRecommendView from 'views/home/childComps/HomeRecommendView'
 import HomeFeatureView from 'views/home/childComps/HomeFeatureView'
 
 import { getHomeMultidata, getHomeGoods } from 'network/home'
+
+import { debounce } from 'common/utils'
 
 export default {
   name: 'Home',
@@ -33,6 +37,7 @@ export default {
     Scroll,
     TabControl,
     GoodsList,
+    BackTop,
     HomeSwiper,
     HomeRecommendView,
     HomeFeatureView
@@ -47,7 +52,8 @@ export default {
         'pop': { page: 0, list: [] },
         'new': { page: 0, list: [] },
         'sell': { page: 0, list: [] }
-      }
+      },
+      isShowBackTop: false
     }
   },
   computed: {
@@ -61,6 +67,16 @@ export default {
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
+
+  },
+  mounted() {
+    // 使用防抖函数
+    const refresh = debounce(this.$refs.scroll.loadRefresh, 50)
+
+    // 时间总线监听图片加载
+    this.$bus.$on('itemImageLoad', () => {
+      refresh()
+    })
   },
   methods: {
     /* *
@@ -81,8 +97,18 @@ export default {
       }
       // this.$refs.tabControl1.currentIndex = index
       // this.$refs.tabControl2.currentIndex = index
-
     },
+    backTop() {
+      this.$refs.scroll.scrollTo(0, 0, 500)
+    },
+    ctrlShow(position) {
+      this.isShowBackTop = (-position.y) > 1000
+    },
+    pullingUp() {
+      this.getHomeGoods(this.currentType)
+      this.$refs.scroll.finishPullUp()
+    },
+
     /* *
     网络请求相关
     * */
