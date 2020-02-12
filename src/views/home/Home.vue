@@ -3,11 +3,27 @@
     <NavBar class="home-nav">
       <div slot="center">购物街</div>
     </NavBar>
-    <Scroll class="content" ref="scroll" @ctrlShow="ctrlShow" :probe="3" @pullingUp="pullingUp">
+    <TabControl
+      :tabs="['流行', '新款', '精选']"
+      @tabSwitch="tabSwitch"
+      ref="tabControl1"
+      v-show="isTabFixed"
+    />
+    <Scroll
+      class="content"
+      ref="scroll"
+      @contentScroll="contentScroll"
+      :probe="3"
+      @pullingUp="pullingUp"
+    >
       <HomeSwiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
       <HomeRecommendView :recommends="recommends" />
       <HomeFeatureView />
-      <TabControl :tabs="['流行', '新款', '精选']" @tabSwitch="tabSwitch" ref="tabControl2" />
+        <TabControl
+          :tabs="['流行', '新款', '精选']"
+          @tabSwitch="tabSwitch"
+          ref="tabControl2"
+        />
       <GoodsList :goods="showGoods" />
     </Scroll>
     <BackTop @click.native="backTop" v-show="isShowBackTop" />
@@ -53,7 +69,9 @@ export default {
         'new': { page: 0, list: [] },
         'sell': { page: 0, list: [] }
       },
-      isShowBackTop: false
+      isShowBackTop: false,
+      isTabFixed: false,
+      tabOffsetTop: 0
     }
   },
   computed: {
@@ -70,10 +88,10 @@ export default {
 
   },
   mounted() {
-    // 使用防抖函数
+    // 使用防抖函数返回一个新的函数，然后使用事件总线执行这个函数
     const refresh = debounce(this.$refs.scroll.loadRefresh, 50)
 
-    // 时间总线监听图片加载
+    // 事件总线监听图片加载
     this.$bus.$on('itemImageLoad', () => {
       refresh()
     })
@@ -83,7 +101,6 @@ export default {
     事件监听相关
     * */
     tabSwitch(index) {
-      console.log(index)
       switch (index) {
         case 0:
           this.currentType = 'pop';
@@ -95,14 +112,15 @@ export default {
           this.currentType = 'sell';
           break;
       }
-      // this.$refs.tabControl1.currentIndex = index
-      // this.$refs.tabControl2.currentIndex = index
+      this.$refs.tabControl1.currentIndex = index
+      this.$refs.tabControl2.currentIndex = index
     },
     backTop() {
       this.$refs.scroll.scrollTo(0, 0, 500)
     },
-    ctrlShow(position) {
+    contentScroll(position) {
       this.isShowBackTop = (-position.y) > 1000
+      this.isTabFixed = (-position.y) > this.tabOffsetTop
     },
     pullingUp() {
       this.getHomeGoods(this.currentType)
@@ -116,8 +134,7 @@ export default {
     swiperImageLoad() {
       //2. 获取tabControl的offsetTop
       // 所有的组件都有$el 属性，用于获取组件中的元素
-      // this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
-      console.log(this.tabOffsetTop)
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
     },
     getHomeMultidata() {
       getHomeMultidata().then(res => {
@@ -151,9 +168,9 @@ export default {
   background-color: var(--color-tint);
   color: #fff;
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  top: 0;
   z-index: 9;
   height: 44px;
 }
@@ -165,4 +182,5 @@ export default {
   /* height: calc(100vh - 93px); */
   position: absolute;
 }
+
 </style> 

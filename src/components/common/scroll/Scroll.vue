@@ -29,7 +29,7 @@ export default {
       click: true
     })
     this.scroll.on('scroll', (position) => {
-      this.$emit('ctrlShow', position)
+      this.$emit('contentScroll', position)
     })
     this.scroll.on('pullingUp', () => {
       this.$emit('pullingUp')
