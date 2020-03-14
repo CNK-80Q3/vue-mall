@@ -1,24 +1,36 @@
 <template>
   <div id="detail">
-    <DetailNavBar class="detail-nav" @DetailNavSwitch="DetailNavSwitch" ref="navbar" />
-    <Scroll class="scroll-content" ref="scroll" :probe="3" @contentScroll="contentScroll">
+    <DetailNavBar
+      class="detail-nav"
+      @DetailNavSwitch="DetailNavSwitch"
+      ref="navbar"
+    />
+    <Scroll
+      class="scroll-content"
+      ref="scroll"
+      :probe="3"
+      @contentScroll="contentScroll"
+    >
       <DetailSwiper :top-images="topImages" />
       <DetailBaseInfo :goods-base-info="goodsBaseInfo" />
       <DetailShopInfo :shop-info="shopInfo" />
-      <DetailGoodsInfo :detail-info="detailInfo" @DetailImageLoad="DetailImageLoad" />
+      <DetailGoodsInfo
+        :detail-info="detailInfo"
+        @DetailImageLoad="DetailImageLoad"
+      />
       <DetailParamInfo ref="param" :param-info="paramInfo" />
       <DetailCommentInfo ref="comment" :comment-info="commentInfo" />
       <GoodsList :goods="recommendInfo" ref="recommend" />
     </Scroll>
     <BackTop @click.native="backTop" v-show="isShowBackTop" />
-    <Toast :message="successAddMessage" :show="isShowToast" />
     <DetailBottomBar @addToCart="addToCart" />
+    <!-- <Toast :message="successAddMessage" :show="isShowToast" /> -->
   </div>
 </template>
 
 <script>
 import Scroll from "components/common/scroll/Scroll";
-import Toast from "components/common/toast/Toast";
+// import Toast from "components/common/toast/Toast";
 import GoodsList from "components/content/goods/GoodsList";
 
 import DetailNavBar from "./childComps/DetailNavBar";
@@ -40,7 +52,7 @@ import {
 
 import { debounce } from "common/utils";
 import { itemListenerMixin, backTopMixin } from "common/mixin";
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
   name: "Detail",
@@ -54,8 +66,8 @@ export default {
     DetailCommentInfo,
     Scroll,
     GoodsList,
-    DetailBottomBar,
-    Toast
+    DetailBottomBar
+    // Toast
   },
   data() {
     return {
@@ -69,9 +81,9 @@ export default {
       recommendInfo: [],
       themeTopYs: [],
       getThemeTopY: null,
-      areaIndex: 0,
-      successAddMessage: "",
-      isShowToast: false
+      areaIndex: 0
+      // successAddMessage: "",
+      // isShowToast: false
     };
   },
   mixins: [itemListenerMixin, backTopMixin],
@@ -82,7 +94,6 @@ export default {
     // 根据id请求详情数据
     getDetail(this.id).then(res => {
       const data = res.result;
-      console.log(data);
       // 获取顶部轮播图数据
       this.topImages = data.itemInfo.topImages;
       // 获取商品数据
@@ -116,12 +127,15 @@ export default {
       this.themeTopYs = [];
 
       this.themeTopYs.push(0);
-      this.$refs.param.$el.offsetTop && this.themeTopYs.push(this.$refs.param.$el.offsetTop);
-      this.$refs.comment.$el.offsetTop && this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-      this.$refs.recommend.$el.offsetTop && this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
+      this.$refs.param.$el.offsetTop &&
+        this.themeTopYs.push(this.$refs.param.$el.offsetTop);
+      this.$refs.comment.$el.offsetTop &&
+        this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
+      this.$refs.recommend.$el.offsetTop &&
+        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
     }, 100);
   },
-  mounted() { },
+  mounted() {},
   destroyed() {
     this.$bus.$off("itemImageLoad", this.itemImageListener);
   },
@@ -164,9 +178,11 @@ export default {
       let len = themeTopYs.length;
 
       for (let i = 0; i < len - 1; i++) {
-        if (this.areaIndex !== i && i < len - 1 &&
-          (positionY >= themeTopYs[i] &&
-            positionY < themeTopYs[i + 1])
+        if (
+          this.areaIndex !== i &&
+          i < len - 1 &&
+          positionY >= themeTopYs[i] &&
+          positionY < themeTopYs[i + 1]
         ) {
           this.areaIndex = i;
           this.$refs.navbar.currentIndex = this.areaIndex;
@@ -190,12 +206,13 @@ export default {
       // 将actions中的方法映射到methods中可以直接调用，而不通过this.$store
       this.addCart(product).then(resolve => {
         // 由于Toast是很多地方都要使用的组件，而普通方式封装的插件使用起来太麻烦，所以用插件的方式封装，复用的时候一行代码就搞定了。
-        this.successAddMessage = resolve
-        this.isShowToast = true
-        setTimeout(() => {
-          this.isShowToast = false
-          this.successAddMessage = ""
-        }, 1500)
+        // this.successAddMessage = resolve
+        // this.isShowToast = true
+        // setTimeout(() => {
+        //   this.isShowToast = false
+        //   this.successAddMessage = ""
+        // }, 1500)
+        this.$toast.showMessage(resolve, 1500);
       });
       // this.$store.dispatch("addToCart", product).then(res => console.log(res), rej => console.log(rej));
     }

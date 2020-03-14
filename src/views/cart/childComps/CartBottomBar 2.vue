@@ -1,14 +1,11 @@
 <template>
   <div class="cart-bottom-bar">
     <div class="bar-left">
-      <CheckButton
-        :is-checked="allSelected"
-        @click.native="checkClick"
-      ></CheckButton>
+      <CheckButton :is-checked="allSelected" @click.native="checkClick"></CheckButton>
       <span>全选</span>
       <span>合计:{{ totalPrice }}</span>
     </div>
-    <div class="bar-right" @click="calcClick">去结算({{ totalGoods }})</div>
+    <div class="bar-right">去计算({{ totalGoods }})</div>
   </div>
 </template>
 
@@ -74,11 +71,6 @@ export default {
         this.cartList.map(item => {
           item.checked = false;
         });
-      }
-    },
-    calcClick() {
-      if (!this.cartList.length || !this.totalGoods) {
-        this.$toast.showMessage("您还没有选择物品", 1000);
       }
     }
   }

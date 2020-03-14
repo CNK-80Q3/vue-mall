@@ -38,7 +38,6 @@ export default {
   methods: {
     scrollGoto(x, y, time = 300) {
       this.scroll && this.scroll.scrollTo(x, y, time);
-      console.log(y);
     },
     finishPullUp() {
       this.scroll && this.scroll.finishPullUp();
