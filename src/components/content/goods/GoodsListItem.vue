@@ -1,49 +1,58 @@
 <template>
-  <div class="goods-list-item">
-    <a :href="goodsItem.clientUrl">
-      <img :src="goodsItem.show.img" :alt="goodsItem.title" @load="imageLoad"/>
-    </a>
-    <a :href="goodsItem.clientUrl">
-      <p>{{goodsItem.title}}</p>
-    </a>
+  <div class="goods-list-item" @click="itemClick">
+    <img :src="image" :alt="goodsItem.title" @load="imageLoad" />
+    <div class="goods-title">
+      <p>{{ goodsItem.title }}</p>
+    </div>
     <div class="goods-info">
-      <span class="price">价格：{{goodsItem.price}}</span>
-      <span class="collection">{{goodsItem.cfav}}</span>
+      <span class="price">价格：{{ goodsItem.price }}</span>
+      <span class="collection">{{ goodsItem.cfav }}</span>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'GoodsListItem',
+  name: "GoodsListItem",
   props: {
     goodsItem: {
       type: Object,
       default() {
-        return {}
+        return {};
       }
     }
   },
+  computed: {
+    image() {
+      return this.goodsItem.image || this.goodsItem.show.img;
+    }
+  },
   methods: {
-    // 使用时间总线管理事件，时间总线与vuex类似，只不过时间总线管理事件，vuex管理状态
+    // 使用事件总线管理事件，事件总线与vuex类似，只不过事件总线管理事件，vuex管理状态
     imageLoad() {
-      this.$bus.$emit('itemImageLoad')
+      this.$bus.$emit("itemImageLoad");
+    },
+    itemClick() {
+      this.$router.push("/detail/" + this.goodsItem.iid);
     }
   }
-}
+};
 </script>
 
 <style scoped>
-.goods-list-item a img {
+.goods-list-item img {
   position: relative;
   width: 100%;
+  height: 250px;
+  background-clip: border-box;
   border-radius: 5px;
+  object-fit: cover;
 }
 
-.goods-list-item a p {
+.goods-list-item p {
   width: 100%;
   height: 6%;
-  padding: 0 5px;
+  padding: 5px 5px;
   line-height: 100%;
   margin-top: 5px;
   overflow: hidden;

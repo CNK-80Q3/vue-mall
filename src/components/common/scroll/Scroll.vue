@@ -7,14 +7,14 @@
 </template>
 
 <script>
-import BScroll from 'better-scroll'
+import BScroll from "better-scroll";
 
 export default {
-  name: 'Scroll',
+  name: "Scroll",
   data() {
     return {
       scroll: null
-    }
+    };
   },
   props: {
     probe: {
@@ -27,27 +27,31 @@ export default {
       probeType: this.probe,
       pullUpLoad: true,
       click: true
-    })
-    this.scroll.on('scroll', (position) => {
-      this.$emit('contentScroll', position)
-    })
-    this.scroll.on('pullingUp', () => {
-      this.$emit('pullingUp')
-    })
+    });
+    this.scroll.on("scroll", position => {
+      this.$emit("contentScroll", position);
+    });
+    this.scroll.on("pullingUp", () => {
+      this.$emit("pullingUp");
+    });
   },
   methods: {
-    scrollTo(x, y, time = 300) {
-      this.scroll && this.scroll.scrollTo(x, y, time)
+    scrollGoto(x, y, time = 300) {
+      this.scroll && this.scroll.scrollTo(x, y, time);
+      console.log(y);
     },
     finishPullUp() {
-      this.scroll && this.scroll.finishPullUp()
+      this.scroll && this.scroll.finishPullUp();
     },
     loadRefresh() {
-      this.scroll && this.scroll.refresh()
+      this.scroll && this.scroll.refresh();
+      // console.log('refresh time')
+    },
+    getScrollY() {
+      return this.scroll ? this.scroll.y : 0;
     }
   }
-}
+};
 </script>
 
-<style>
-</style>
+<style></style>

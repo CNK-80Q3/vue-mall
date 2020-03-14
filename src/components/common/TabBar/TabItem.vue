@@ -19,7 +19,7 @@ export default {
     path: String,
     activeColor: {
       type: String,
-      default: '#d81e06'
+      default: 'var(--color-tint)'
     }
   },
   data() {
@@ -52,9 +52,5 @@ export default {
 
 .tab-item div {
   font-size: 12px;
-}
-
-.active {
-  color: #d81e06;
 }
 </style>

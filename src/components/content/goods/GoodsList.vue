@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import GoodsListItem from './GoodsListItem'
+import GoodsListItem from "./GoodsListItem";
 
 export default {
-  name: 'GoodsList',
+  name: "GoodsList",
   components: {
     GoodsListItem
   },
@@ -20,11 +20,11 @@ export default {
     goods: {
       type: Array,
       default() {
-        return []
+        return [];
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

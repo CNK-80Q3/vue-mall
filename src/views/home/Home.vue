@@ -19,11 +19,11 @@
       <HomeSwiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
       <HomeRecommendView :recommends="recommends" />
       <HomeFeatureView />
-        <TabControl
-          :tabs="['流行', '新款', '精选']"
-          @tabSwitch="tabSwitch"
-          ref="tabControl2"
-        />
+      <TabControl
+        :tabs="['流行', '新款', '精选']"
+        @tabSwitch="tabSwitch"
+        ref="tabControl2"
+      />
       <GoodsList :goods="showGoods" />
     </Scroll>
     <BackTop @click.native="backTop" v-show="isShowBackTop" />
@@ -31,29 +31,28 @@
 </template>
 
 <script>
-import NavBar from 'components/common/navbar/NavBar'
-import Scroll from 'components/common/scroll/Scroll'
+import NavBar from "components/common/navbar/NavBar";
+import Scroll from "components/common/scroll/Scroll";
 
-import TabControl from 'components/content/tabControl/TabControl'
-import GoodsList from 'components/content/goods/GoodsList'
-import BackTop from 'components/content/backTop/BackTop'
+import TabControl from "components/content/tabControl/TabControl";
+import GoodsList from "components/content/goods/GoodsList";
 
-import HomeSwiper from 'views/home/childComps/HomeSwiper'
-import HomeRecommendView from 'views/home/childComps/HomeRecommendView'
-import HomeFeatureView from 'views/home/childComps/HomeFeatureView'
+import HomeSwiper from "views/home/childComps/HomeSwiper";
+import HomeRecommendView from "views/home/childComps/HomeRecommendView";
+import HomeFeatureView from "views/home/childComps/HomeFeatureView";
 
-import { getHomeMultidata, getHomeGoods } from 'network/home'
+import { getHomeMultidata, getHomeGoods } from "network/home";
 
-import { debounce } from 'common/utils'
+import { debounce } from "common/utils";
+import { itemListenerMixin, backTopMixin } from "common/mixin";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     NavBar,
     Scroll,
     TabControl,
     GoodsList,
-    BackTop,
     HomeSwiper,
     HomeRecommendView,
     HomeFeatureView
@@ -63,38 +62,46 @@ export default {
       result: null,
       banners: [],
       recommends: [],
-      currentType: 'pop',
+      currentType: "pop",
       goods: {
-        'pop': { page: 0, list: [] },
-        'new': { page: 0, list: [] },
-        'sell': { page: 0, list: [] }
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] }
       },
-      isShowBackTop: false,
       isTabFixed: false,
-      tabOffsetTop: 0
-    }
+      tabOffsetTop: 0,
+      saveY: 0
+    };
   },
   computed: {
     showGoods() {
-      return this.goods[this.currentType].list
+      return this.goods[this.currentType].list;
     }
   },
+  mixins: [itemListenerMixin, backTopMixin],
   created() {
     //1.请求多个数据
-    this.getHomeMultidata()
-    this.getHomeGoods('pop')
-    this.getHomeGoods('new')
-    this.getHomeGoods('sell')
-
+    this.getHomeMultidata();
+    this.getHomeGoods("pop");
+    this.getHomeGoods("new");
+    this.getHomeGoods("sell");
   },
   mounted() {
-    // 使用防抖函数返回一个新的函数，然后使用事件总线执行这个函数
-    const refresh = debounce(this.$refs.scroll.loadRefresh, 50)
+    this.tabSwitch(0);
+  },
+  activated() {
+    setTimeout(() => {
+      // console.log(this.$refs.scroll);
+    }, 3000);
+    this.$refs.scroll.scrollGoto(0, this.saveY, 0);
+    this.$refs.scroll.loadRefresh();
+  },
+  deactivated() {
+    // 设置包裹keep-alive标签时 deactivated() 函数生效，不设置的话 destroyed() 函数生效
+    this.saveY = this.$refs.scroll.getScrollY();
 
-    // 事件总线监听图片加载
-    this.$bus.$on('itemImageLoad', () => {
-      refresh()
-    })
+    // 取消事件总线监听
+    this.$bus.$off("itemImageload", this.itemImgListener);
   },
   methods: {
     /* *
@@ -103,28 +110,25 @@ export default {
     tabSwitch(index) {
       switch (index) {
         case 0:
-          this.currentType = 'pop';
+          this.currentType = "pop";
           break;
         case 1:
-          this.currentType = 'new';
+          this.currentType = "new";
           break;
         case 2:
-          this.currentType = 'sell';
+          this.currentType = "sell";
           break;
       }
-      this.$refs.tabControl1.currentIndex = index
-      this.$refs.tabControl2.currentIndex = index
-    },
-    backTop() {
-      this.$refs.scroll.scrollTo(0, 0, 500)
+      this.$refs.tabControl1.currentIndex = index;
+      this.$refs.tabControl2.currentIndex = index;
     },
     contentScroll(position) {
-      this.isShowBackTop = (-position.y) > 1000
-      this.isTabFixed = (-position.y) > this.tabOffsetTop
+      this.isShowBackTop = -position.y > 1000;
+      this.isTabFixed = -position.y > this.tabOffsetTop;
     },
     pullingUp() {
-      this.getHomeGoods(this.currentType)
-      this.$refs.scroll.finishPullUp()
+      this.getHomeGoods(this.currentType);
+      this.$refs.scroll.finishPullUp();
     },
 
     /* *
@@ -134,31 +138,29 @@ export default {
     swiperImageLoad() {
       //2. 获取tabControl的offsetTop
       // 所有的组件都有$el 属性，用于获取组件中的元素
-      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
     },
     getHomeMultidata() {
       getHomeMultidata().then(res => {
-        console.log(res)
-        this.result = res
-        this.banners = res.data.banner.list
-        this.recommends = res.data.recommend.list
-      })
+        this.result = res;
+        this.banners = res.data.banner.list;
+        this.recommends = res.data.recommend.list;
+      });
     },
     getHomeGoods(type) {
-      const page = this.goods[type].page + 1
+      const page = this.goods[type].page + 1;
       getHomeGoods(type, page).then(res => {
         // res -> pop 的第一页数据
-        console.log(res)
-        this.goods[type].list.push(...res.data.list)
-        this.type = res
-        this.goods[type].page + 1
-      })
+        this.goods[type].list.push(...res.data.list);
+        this.type = res;
+        this.goods[type].page + 1;
+      });
     }
   }
-}
+};
 </script>
 
-<style  scoped>
+<style scoped>
 #home {
   height: 100vh;
   padding-top: 44px;
@@ -179,8 +181,7 @@ export default {
   width: 100%;
   top: 44px;
   bottom: 49px;
-  /* height: calc(100vh - 93px); */
+  height: calc(100vh - 93px);
   position: absolute;
 }
-
-</style> 
+</style>
