@@ -1,4 +1,4 @@
-import { ADD_COUNTER, ADD_TO_CART, SELECT_ALL } from "./mutations-types";
+import { ADD_COUNTER, ADD_TO_CART } from "./mutations-types";
 
 export default {
   [ADD_COUNTER](state, payload) {

@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div class="home-container">
     <NavBar class="home-nav">
       <div slot="center">购物街</div>
     </NavBar>
@@ -10,7 +10,7 @@
       v-show="isTabFixed"
     />
     <Scroll
-      class="content"
+      class="scroll-wrapper"
       ref="scroll"
       @contentScroll="contentScroll"
       :probe="3"
@@ -19,11 +19,7 @@
       <HomeSwiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
       <HomeRecommendView :recommends="recommends" />
       <HomeFeatureView />
-      <TabControl
-        :tabs="['流行', '新款', '精选']"
-        @tabSwitch="tabSwitch"
-        ref="tabControl2"
-      />
+      <TabControl :tabs="['流行', '新款', '精选']" @tabSwitch="tabSwitch" ref="tabControl2" />
       <GoodsList :goods="showGoods" />
     </Scroll>
     <BackTop @click.native="backTop" v-show="isShowBackTop" />
@@ -161,9 +157,9 @@ export default {
 </script>
 
 <style scoped>
-#home {
+.home-container {
   height: 100vh;
-  padding-top: 44px;
+  margin-top: 44px;
 }
 
 .home-nav {

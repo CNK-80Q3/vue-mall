@@ -1,23 +1,11 @@
 <template>
-  <div id="detail">
-    <DetailNavBar
-      class="detail-nav"
-      @DetailNavSwitch="DetailNavSwitch"
-      ref="navbar"
-    />
-    <Scroll
-      class="scroll-content"
-      ref="scroll"
-      :probe="3"
-      @contentScroll="contentScroll"
-    >
+  <div class="detail-container">
+    <DetailNavBar class="detail-nav" @DetailNavSwitch="DetailNavSwitch" ref="navbar" />
+    <Scroll class="scroll-wrapper" ref="scroll" :probe="3" @contentScroll="contentScroll">
       <DetailSwiper :top-images="topImages" />
       <DetailBaseInfo :goods-base-info="goodsBaseInfo" />
       <DetailShopInfo :shop-info="shopInfo" />
-      <DetailGoodsInfo
-        :detail-info="detailInfo"
-        @DetailImageLoad="DetailImageLoad"
-      />
+      <DetailGoodsInfo :detail-info="detailInfo" @DetailImageLoad="DetailImageLoad" />
       <DetailParamInfo ref="param" :param-info="paramInfo" />
       <DetailCommentInfo ref="comment" :comment-info="commentInfo" />
       <GoodsList :goods="recommendInfo" ref="recommend" />
@@ -122,20 +110,25 @@ export default {
       this.recommendInfo = res.data.list;
     });
 
-    // 获取模块定位，并进行防抖包装
-    this.getThemeTopY = debounce(() => {
-      this.themeTopYs = [];
 
-      this.themeTopYs.push(0);
-      this.$refs.param.$el.offsetTop &&
-        this.themeTopYs.push(this.$refs.param.$el.offsetTop);
-      this.$refs.comment.$el.offsetTop &&
-        this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-      this.$refs.recommend.$el.offsetTop &&
-        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
-    }, 100);
   },
-  mounted() {},
+  updated() {
+    // 获取模块定位，并进行防抖包装
+    this.$nextTick(() => {
+      this.getThemeTopY = debounce(() => {
+        this.themeTopYs = [];
+
+        this.themeTopYs.push(0);
+        this.$refs.param.$el.offsetTop &&
+          this.themeTopYs.push(this.$refs.param.$el.offsetTop);
+        this.$refs.comment.$el.offsetTop &&
+          this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
+        this.$refs.recommend.$el.offsetTop &&
+          this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
+      }, 100);
+    })
+
+  },
   destroyed() {
     this.$bus.$off("itemImageLoad", this.itemImageListener);
   },
@@ -221,10 +214,8 @@ export default {
 </script>
 
 <style scoped>
-#detail {
+.detail-container {
   height: 100vh;
-  position: relative;
-  z-index: 10000;
   background: #fff;
 }
 
@@ -234,7 +225,7 @@ export default {
   background: #fff;
 }
 
-.scroll-content {
+.scroll-wrapper {
   height: calc(100% - 93px);
 }
 </style>

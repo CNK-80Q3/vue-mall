@@ -26,7 +26,8 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       probeType: this.probe,
       pullUpLoad: true,
-      click: true
+      click: true,
+      mouseWheel: true
     });
     this.scroll.on("scroll", position => {
       this.$emit("contentScroll", position);

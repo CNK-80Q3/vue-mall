@@ -19,21 +19,23 @@ export default {
 </script>
 
 <style scoped>
-  .nav-bar {
-    height: 44px;
-    display: flex;
-    line-height: 44px;
-    text-align: center;
-    box-shadow: 0 -3px 3px rgba(125, 125, 125, .2);
-    z-index: 1000;
-  }
+.nav-bar {
+  height: 44px;
+  display: flex;
+  line-height: 44px;
+  text-align: center;
+  box-shadow: 0 -3px 3px rgba(125, 125, 125, 0.2);
+  z-index: 1000;
+}
 
-  .left, .right {
-    height: 44px;
-    width: 60px;
-  }
+.left,
+.right {
+  height: 44px;
+  width: 60px;
+}
 
-  .center {
-    flex: 1;
-  }
+.center {
+  flex: 1;
+  font-size: 14px;
+}
 </style>

@@ -39,14 +39,13 @@ export default {
 
 <style scoped>
 .tab-control {
-  width: 100vw;
+  width: 100%;
   height: 40px;
   display: flex;
   text-align: center;
   line-height: 40px;
   font-size: 15px;
-  position: sticky;
-  top: 44px;
+  position: absolute;
   z-index: 8;
   background-color: #fff;
 }

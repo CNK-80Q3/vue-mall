@@ -1,4 +1,4 @@
-import { ADD_COUNTER, ADD_TO_CART } from "./mutations-types";
+import { ADD_COUNTER, ADD_TO_CART, GET_SUB_CATEGORY } from "./mutations-types";
 
 export default {
   // mutations唯一目的就是修改state中的状态

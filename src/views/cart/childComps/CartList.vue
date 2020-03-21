@@ -1,11 +1,7 @@
 <template>
   <div class="cart-list">
-    <Scroll class="scroll-content" ref="scroll">
-      <CartListItem
-        v-for="(item, index) in cartList"
-        :key="index"
-        :goods-item="item"
-      ></CartListItem>
+    <Scroll class="scroll-wrapper" ref="scroll">
+      <CartListItem v-for="(item, index) in cartList" :key="index" :goods-item="item"></CartListItem>
     </Scroll>
   </div>
 </template>
@@ -40,7 +36,7 @@ export default {
   height: calc(100% - 133px);
 }
 
-.scroll-content {
+.scroll-wrapper {
   height: 100%;
 }
 </style>

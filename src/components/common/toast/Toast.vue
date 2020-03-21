@@ -40,6 +40,6 @@ export default {
   border-radius: 10px;
   text-align: center;
   line-height: 20px;
-  text-overflow: ellipsis;
+  z-index: 10;
 }
 </style>

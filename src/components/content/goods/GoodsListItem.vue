@@ -5,7 +5,7 @@
       <p>{{ goodsItem.title }}</p>
     </div>
     <div class="goods-info">
-      <span class="price">价格：{{ goodsItem.price }}</span>
+      <span class="price">￥{{ goodsItem.price }}</span>
       <span class="collection">{{ goodsItem.cfav }}</span>
     </div>
   </div>
@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     image() {
-      return this.goodsItem.image || this.goodsItem.show.img;
+      return this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
     }
   },
   methods: {

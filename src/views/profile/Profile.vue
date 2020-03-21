@@ -3,11 +3,11 @@
     <NavBar class="profile-nav">
       <div slot="center">我的</div>
     </NavBar>
-    <Scroll class="content" ref="scroll">
-      <UserInfo></UserInfo>
-      <AccountData></AccountData>
+    <Scroll class="scroll-wrapper" ref="scroll">
+      <UserInfo />
+      <AccountData />
       <ListView v-for="list in profileLists" :list="list">
-        <ListItem slot="list-item" v-for="item in list" :list-item="item"></ListItem>
+        <ListItem slot="list-item" v-for="item in list" :list-item="item" />
       </ListView>
     </Scroll>
   </div>
@@ -60,10 +60,17 @@ export default {
       }
     }
   },
+  activated() {
+    this.$refs.scroll.loadRefresh();
+  }
 };
 </script>
 
 <style scoped>
+.profile-content {
+  height: 100vh;
+}
+
 .profile-nav {
   background-color: var(--color-tint);
   color: #fff;
@@ -75,12 +82,12 @@ export default {
   height: 44px;
 }
 
-.content {
+.scroll-wrapper {
   width: 100%;
   top: 44px;
   bottom: 49px;
   height: calc(100vh - 93px);
-  position: absolute;
+  position: relative;
   background-color: #f5f5f5;
 }
 </style>

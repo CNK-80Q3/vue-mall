@@ -1,362 +1,187 @@
 <template>
-  <h1>
-    <ul>
-      <li>name1</li>
-      <li>name2</li>
-      <li>name3</li>
-      <li>name4</li>
-      <li>name5</li>
-      <li>name6</li>
-      <li>name7</li>
-      <li>name8</li>
-      <li>name9</li>
-      <li>name10</li>
-      <li>name11</li>
-      <li>name12</li>
-      <li>name13</li>
-      <li>name14</li>
-      <li>name15</li>
-      <li>name16</li>
-      <li>name17</li>
-      <li>name18</li>
-      <li>name19</li>
-      <li>name20</li>
-      <li>name21</li>
-      <li>name22</li>
-      <li>name23</li>
-      <li>name24</li>
-      <li>name25</li>
-      <li>name26</li>
-      <li>name27</li>
-      <li>name28</li>
-      <li>name29</li>
-      <li>name30</li>
-      <li>name31</li>
-      <li>name32</li>
-      <li>name33</li>
-      <li>name34</li>
-      <li>name35</li>
-      <li>name36</li>
-      <li>name37</li>
-      <li>name38</li>
-      <li>name39</li>
-      <li>name40</li>
-      <li>name41</li>
-      <li>name42</li>
-      <li>name43</li>
-      <li>name44</li>
-      <li>name45</li>
-      <li>name46</li>
-      <li>name47</li>
-      <li>name48</li>
-      <li>name49</li>
-      <li>name50</li>
-      <li>name51</li>
-      <li>name52</li>
-      <li>name53</li>
-      <li>name54</li>
-      <li>name55</li>
-      <li>name56</li>
-      <li>name57</li>
-      <li>name58</li>
-      <li>name59</li>
-      <li>name60</li>
-      <li>name61</li>
-      <li>name62</li>
-      <li>name63</li>
-      <li>name64</li>
-      <li>name65</li>
-      <li>name66</li>
-      <li>name67</li>
-      <li>name68</li>
-      <li>name69</li>
-      <li>name70</li>
-      <li>name71</li>
-      <li>name72</li>
-      <li>name73</li>
-      <li>name74</li>
-      <li>name75</li>
-      <li>name76</li>
-      <li>name77</li>
-      <li>name78</li>
-      <li>name79</li>
-      <li>name80</li>
-      <li>name81</li>
-      <li>name82</li>
-      <li>name83</li>
-      <li>name84</li>
-      <li>name85</li>
-      <li>name86</li>
-      <li>name87</li>
-      <li>name88</li>
-      <li>name89</li>
-      <li>name90</li>
-      <li>name91</li>
-      <li>name92</li>
-      <li>name93</li>
-      <li>name94</li>
-      <li>name95</li>
-      <li>name96</li>
-      <li>name97</li>
-      <li>name98</li>
-      <li>name99</li>
-    </ul>
-    <TabControl :tabs="['流行', '新款', '精选']" class="sticky"/>
-    <ul>
-      <li>name1</li>
-      <li>name2</li>
-      <li>name3</li>
-      <li>name4</li>
-      <li>name5</li>
-      <li>name6</li>
-      <li>name7</li>
-      <li>name8</li>
-      <li>name9</li>
-      <li>name10</li>
-      <li>name11</li>
-      <li>name12</li>
-      <li>name13</li>
-      <li>name14</li>
-      <li>name15</li>
-      <li>name16</li>
-      <li>name17</li>
-      <li>name18</li>
-      <li>name19</li>
-      <li>name20</li>
-      <li>name21</li>
-      <li>name22</li>
-      <li>name23</li>
-      <li>name24</li>
-      <li>name25</li>
-      <li>name26</li>
-      <li>name27</li>
-      <li>name28</li>
-      <li>name29</li>
-      <li>name30</li>
-      <li>name31</li>
-      <li>name32</li>
-      <li>name33</li>
-      <li>name34</li>
-      <li>name35</li>
-      <li>name36</li>
-      <li>name37</li>
-      <li>name38</li>
-      <li>name39</li>
-      <li>name40</li>
-      <li>name41</li>
-      <li>name42</li>
-      <li>name43</li>
-      <li>name44</li>
-      <li>name45</li>
-      <li>name46</li>
-      <li>name47</li>
-      <li>name48</li>
-      <li>name49</li>
-      <li>name50</li>
-      <li>name51</li>
-      <li>name52</li>
-      <li>name53</li>
-      <li>name54</li>
-      <li>name55</li>
-      <li>name56</li>
-      <li>name57</li>
-      <li>name58</li>
-      <li>name59</li>
-      <li>name60</li>
-      <li>name61</li>
-      <li>name62</li>
-      <li>name63</li>
-      <li>name64</li>
-      <li>name65</li>
-      <li>name66</li>
-      <li>name67</li>
-      <li>name68</li>
-      <li>name69</li>
-      <li>name70</li>
-      <li>name71</li>
-      <li>name72</li>
-      <li>name73</li>
-      <li>name74</li>
-      <li>name75</li>
-      <li>name76</li>
-      <li>name77</li>
-      <li>name78</li>
-      <li>name79</li>
-      <li>name80</li>
-      <li>name81</li>
-      <li>name82</li>
-      <li>name83</li>
-      <li>name84</li>
-      <li>name85</li>
-      <li>name86</li>
-      <li>name87</li>
-      <li>name88</li>
-      <li>name89</li>
-      <li>name90</li>
-      <li>name91</li>
-      <li>name92</li>
-      <li>name93</li>
-      <li>name94</li>
-      <li>name95</li>
-      <li>name96</li>
-      <li>name97</li>
-      <li>name98</li>
-      <li>name99</li>
-    </ul>
-    <div class="sticky2">sticky sticky sticky sticky sticky sticky</div>
-    <ul>
-      <li>name1</li>
-      <li>name2</li>
-      <li>name3</li>
-      <li>name4</li>
-      <li>name5</li>
-      <li>name6</li>
-      <li>name7</li>
-      <li>name8</li>
-      <li>name9</li>
-      <li>name10</li>
-      <li>name11</li>
-      <li>name12</li>
-      <li>name13</li>
-      <li>name14</li>
-      <li>name15</li>
-      <li>name16</li>
-      <li>name17</li>
-      <li>name18</li>
-      <li>name19</li>
-      <li>name20</li>
-      <li>name21</li>
-      <li>name22</li>
-      <li>name23</li>
-      <li>name24</li>
-      <li>name25</li>
-      <li>name26</li>
-      <li>name27</li>
-      <li>name28</li>
-      <li>name29</li>
-      <li>name30</li>
-      <li>name31</li>
-      <li>name32</li>
-      <li>name33</li>
-      <li>name34</li>
-      <li>name35</li>
-      <li>name36</li>
-      <li>name37</li>
-      <li>name38</li>
-      <li>name39</li>
-      <li>name40</li>
-      <li>name41</li>
-      <li>name42</li>
-      <li>name43</li>
-      <li>name44</li>
-      <li>name45</li>
-      <li>name46</li>
-      <li>name47</li>
-      <li>name48</li>
-      <li>name49</li>
-      <li>name50</li>
-      <li>name51</li>
-      <li>name52</li>
-      <li>name53</li>
-      <li>name54</li>
-      <li>name55</li>
-      <li>name56</li>
-      <li>name57</li>
-      <li>name58</li>
-      <li>name59</li>
-      <li>name60</li>
-      <li>name61</li>
-      <li>name62</li>
-      <li>name63</li>
-      <li>name64</li>
-      <li>name65</li>
-      <li>name66</li>
-      <li>name67</li>
-      <li>name68</li>
-      <li>name69</li>
-      <li>name70</li>
-      <li>name71</li>
-      <li>name72</li>
-      <li>name73</li>
-      <li>name74</li>
-      <li>name75</li>
-      <li>name76</li>
-      <li>name77</li>
-      <li>name78</li>
-      <li>name79</li>
-      <li>name80</li>
-      <li>name81</li>
-      <li>name82</li>
-      <li>name83</li>
-      <li>name84</li>
-      <li>name85</li>
-      <li>name86</li>
-      <li>name87</li>
-      <li>name88</li>
-      <li>name89</li>
-      <li>name90</li>
-      <li>name91</li>
-      <li>name92</li>
-      <li>name93</li>
-      <li>name94</li>
-      <li>name95</li>
-      <li>name96</li>
-      <li>name97</li>
-      <li>name98</li>
-      <li>name99</li>
-    </ul>
-    <div class="abc">123</div>
-  </h1>
+  <div class="category-content">
+    <NavBar class="category-nav">
+      <div slot="center">商品分类</div>
+    </NavBar>
+    <Sidebar
+      class="sidebar-content"
+      :category-list="categoryList"
+      @selectCategory="selectCategory"
+    />
+    <main>
+      <TabControl :tabs="tabs" @tabSwitch="tabSwitch" ref="tabControl1" v-show="isTabFixed" />
+      <Scroll class="scroll-wrapper" ref="scroll" @contentScroll="contentScroll" :probe="3">
+        <SubCategory :subCategoryList="subCategoryList" />
+        <TabControl :tabs="tabs" @tabSwitch="tabSwitch" ref="tabControl2" />
+        <CategoryDetail :categoryDetail="showCategoryDetail" />
+      </Scroll>
+    </main>
+  </div>
 </template>
 
 <script>
+import Scroll from "components/common/scroll/Scroll"
+import NavBar from 'components/common/navbar/NavBar'
 import TabControl from 'components/content/tabControl/TabControl'
+
+import Sidebar from './childComps/Sidebar'
+import SubCategory from './childComps/SubCategory'
+import CategoryDetail from './childComps/CategoryDetail'
+
+import { getCategory, getSubCategory, getCategoryDetail } from 'network/category'
+import { POP, SELL, NEW } from "common/const"
 
 export default {
   name: 'Category',
   components: {
-    TabControl
+    Scroll,
+    NavBar,
+    TabControl,
+    Sidebar,
+    SubCategory,
+    CategoryDetail
+  },
+  data() {
+    return {
+      categoryList: [],
+      subCategoryList: [],
+      currentIndex: -1,
+      tabs: ["流行", "新款", "销量"],
+      categoryData: {},
+      currentType: POP,
+      isTabFixed: false,
+      tabOffsetTop: 0
+    }
+  },
+  computed: {
+    showSubcategory() {
+      if (this.currentIndex === -1) return {}
+      return this.categoryData[this.currentIndex].subcategories
+    },
+    showCategoryDetail() {
+      if (this.currentIndex === -1) return []
+      // console.log(this.currentType)
+      // console.log(this.categoryData[this.currentIndex].categoryDetail[this.currentType])
+      return this.categoryData[this.currentIndex].categoryDetail[this.currentType]
+    }
+  },
+  methods: {
+    _getCategory() {
+      getCategory().then(res => {
+        this.categoryList = res.data.category.list
+        for (let i = 0; i < this.categoryList.length; i++) {
+          this.categoryData[i] = {
+            subcategories: {},
+            categoryDetail: {
+              "pop": [],
+              "new": [],
+              "sell": []
+            }
+          }
+        }
+        this._getSubCategory(0)
+      })
+    },
+    _getSubCategory(index) {
+      this.currentIndex = index
+      const maitKey = this.categoryList[index].maitKey
+      getSubCategory(maitKey).then(res => {
+        this.subCategoryList = res.data.list;
+        this.categoryData[index].subcategories = res.data
+        this.categoryData = { ...this.categoryData }
+        this._getCategoryDetail(POP)
+        this._getCategoryDetail(NEW)
+        this._getCategoryDetail(SELL)
+      })
+
+    },
+    _getCategoryDetail(type) {
+      // 1.获取请求的miniWallkey
+      const miniWallkey = this.categoryList[this.currentIndex].miniWallkey;
+      // 2.发送请求,传入miniWallkey和type
+      getCategoryDetail(miniWallkey, type).then(res => {
+        // 3.将获取的数据保存下来
+        this.categoryData[this.currentIndex].categoryDetail[type] = res
+        this.categoryData = { ...this.categoryData }
+      })
+    },
+    selectCategory(index) {
+      this._getSubCategory(index)
+      this.isTabFixed && (this.isTabFixed = false)
+    },
+    tabSwitch(index) {
+      switch (index) {
+        case 0:
+          this.currentType = POP
+          break
+        case 1:
+          this.currentType = NEW
+          break
+        case 2:
+          this.currentType = SELL
+          break
+      }
+      this.$refs.tabControl1.currentIndex = index
+      this.$refs.tabControl2.currentIndex = index
+      this.$refs.scroll.scrollGoto(0, -this.tabOffsetTop, 0)
+    },
+    contentScroll(position) {
+      this.isTabFixed = -position.y > this.tabOffsetTop
+    }
+  },
+
+  created() {
+    this._getCategory()
+  },
+  updated() {
+    this.$refs.scroll.loadRefresh()
+    this.$nextTick(() => {
+      this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
+    })
+  },
+  activated() {
+    this.$refs.scroll.loadRefresh()
   }
 }
 </script>
 
 <style>
-.sticky {
+.category-content {
   width: 100vw;
-  height: 40px;
+  height: 100vh;
   display: flex;
-  text-align: center;
-  line-height: 40px;
-  font-size: 15px;
-  position: sticky;
-  top: 0px;
-  z-index: 8;
-  background-color: #fff;
 }
 
-.abc {
-  width: 200px;
-  height: 200px;
-  position: sticky;
-  margin-top: 50px;
-  background: red;
-  bottom: 100px;
-  box-sizing: inherit;
-  padding: 30px;
-  border: 50px solid #000;
+.category-nav {
+  background-color: var(--color-tint);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  height: 44px;
 }
 
-.sticky2 {
-  width: 100vw;
-  height: 40px;
-  display: flex;
-  text-align: center;
-  line-height: 40px;
-  font-size: 15px;
-  position: sticky;
-  top: 0px;
-  z-index: 8;
-  background-color: rgb(232, 15, 15);
-  color: floralwhite;
+.sidebar-content {
+  width: 25%;
+  background-color: #f5f5f5;
+  position: relative;
+  top: 44px;
+  height: calc(100vh - 93px);
+}
+
+main {
+  width: 75%;
+  position: relative;
+  top: 44px;
+  flex: 1;
+  justify-content: center;
+}
+
+.scroll-wrapper {
+  width: 100%;
+  bottom: 49px;
+  height: calc(100vh - 93px);
 }
 </style>
