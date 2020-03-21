@@ -51,13 +51,12 @@ export default {
 
 .goods-list-item p {
   width: 100%;
-  height: 6%;
-  padding: 5px 5px;
-  line-height: 100%;
-  margin-top: 5px;
-  overflow: hidden;
+  margin: 6px 0;
+  display: -webkit-box;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .goods-info {
